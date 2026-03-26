@@ -49,14 +49,12 @@ Algoritmo GestorProyectos
 				Escribir "_______________________________________________________________________"
 				Escribir "====================== FIN DE RESUMEN ================================"
 				Escribir "                                                                       "
-				
+
             3:
-                // TODO: Daniel - Mensaje de salida
-                // Mostrar mensaje que indique "Saliendo del gestor de proyectos..."
-                
+                Escribir "Saliendo del gestor de proyectos ..."
+
             De Otro Modo:
-                // TODO: Daniel - Manejo de opción incorrecta
-                // Mostrar mensaje que indique "Opción inválida. Por favor, seleccione 1, 2 o 3."
+                Escribir "Opción inválida. Por favor, seleccione 1, 2 o 3."
         FinSegun
         
     Hasta Que opcion = 3
