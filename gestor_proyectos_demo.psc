@@ -23,12 +23,29 @@ Algoritmo GestorProyectos
         
         Segun opcion Hacer
             1:
-                // TODO: Alexis - Módulo 2: Registro de horas y Validación de Reglas del Negocio
-                // 1. Pedir al usuario que ingrese la cantidad de horas trabajadas hoy usando Escribir y Leer (guardar en variable horasTrabajadas).
-                // 2. Crear un bloque Si... Entonces para validar:
-                //    - Si horasTrabajadas > 24, mostrar error de jornada irreal.
-                //    - Si horasTrabajadas < 0, mostrar error de horas negativas.
-                //    - Si los datos son correctos, sumar horasTrabajadas a la variable totalHoras y mostrar mensaje de éxito.
+				//Módulo 2: Registro de horas y Validación de Reglas del Negocio
+				
+                Escribir "----------------------------------------"
+                Escribir "REGISTRO DE HORAS TRABAJADAS"
+                Escribir "----------------------------------------"
+                Escribir "Ingrese la cantidad de horas trabajadas hoy: "
+                Leer horasTrabajadas
+                
+                
+                Si horasTrabajadas > 24 Entonces
+                    Escribir "ERROR: Jornada irreal. No puede registrar mas de 24 horas en un dia."
+                Sino
+                    Si horasTrabajadas < 0 Entonces
+                        Escribir "ERROR: Horas negativas. No puede registrar valores negativos."
+                    Sino
+                        
+                        totalHoras <- totalHoras + horasTrabajadas
+                        Escribir "EXITO: Se han registrado ", horasTrabajadas, " horas correctamente."
+                        Escribir "Total acumulado hasta ahora: ", totalHoras, " horas."
+                    FinSi
+                FinSi
+                Escribir "----------------------------------------"
+				
                 
             2:
                 // TODO: Wilbert - Módulo 3: Visualización de datos
