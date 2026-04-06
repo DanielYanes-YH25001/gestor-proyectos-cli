@@ -23,7 +23,7 @@ Algoritmo GestorProyectos
         
         Segun opcion Hacer
             1:
-				//Módulo 2: Registro de horas y Validación de Reglas del Negocio
+				//Módulo 2: Registro de horas y Validación de Reglas del Negocio.
 				
                 Escribir "----------------------------------------"
                 Escribir "REGISTRO DE HORAS TRABAJADAS"
