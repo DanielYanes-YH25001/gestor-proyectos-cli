@@ -23,30 +23,25 @@ Algoritmo GestorProyectos
         
         Segun opcion Hacer
             1:
-				//Módulo 2: Registro de horas y Validación de Reglas del Negocio.
-				
+				//Módulo 2: Registro de horas y Validación de Reglas del Negocio
                 Escribir "----------------------------------------"
                 Escribir "REGISTRO DE HORAS TRABAJADAS"
                 Escribir "----------------------------------------"
                 Escribir "Ingrese la cantidad de horas trabajadas hoy: "
                 Leer horasTrabajadas
                 
-                
                 Si horasTrabajadas > 24 Entonces
-                    Escribir "ERROR: Jornada irreal. No puede registrar mas de 24 horas en un dia."
+                    Escribir "ERROR: Jornada irreal. No puede registrar más de 24 horas en un día."
                 Sino
                     Si horasTrabajadas < 0 Entonces
                         Escribir "ERROR: Horas negativas. No puede registrar valores negativos."
                     Sino
-                        
                         totalHoras <- totalHoras + horasTrabajadas
-                        Escribir "EXITO: Se han registrado ", horasTrabajadas, " horas correctamente."
+                        Escribir "ÉXITO: Se han registrado ", horasTrabajadas, " horas correctamente."
                         Escribir "Total acumulado hasta ahora: ", totalHoras, " horas."
                     FinSi
                 FinSi
                 Escribir "----------------------------------------"
-				
-                
             2:
                 // TODO: Wilbert - Módulo 3: Visualización de datos
                 // 1. Mostrar en pantalla un resumen claro usando la función Escribir.
