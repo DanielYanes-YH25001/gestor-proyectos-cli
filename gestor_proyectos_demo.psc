@@ -63,10 +63,11 @@ Algoritmo GestorProyectos
 				Escribir "                                                                       "
 
             3:
-                Escribir "Saliendo del gestor de proyectos ..."
+                Escribir "Saliendo del gestor de proyectos..."
 
             De Otro Modo:
-                Escribir "Opción inválida. Por favor, seleccione 1, 2 o 3."
+				Escribir "Opción inválida. Por favor, seleccione una de las tres opciones."
+				Escribir ""
         FinSegun
         
     Hasta Que opcion = 3
