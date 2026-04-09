@@ -15,7 +15,7 @@ Esta es una aplicación de Interfaz de Línea de Comandos (CLI) desarrollada con
 - Un proyecto contiene varias tareas que se pueden delegar a diferentes empleados.
 - El sistema permite a los empleados registrar la cantidad de horas que trabajan en cada tarea específica.
 - Se incluye la funcionalidad para calcular el total de horas invertidas, ya sea filtrando por tarea individual o por proyecto completo.
-- Se agregan validaciones de seguridad para evitar que se ingresen datos erróneos, como impedir que un empleado registre jornadas irreales, como por ejemplo más de 24 horas en un solo día o valores negativos.
+- Se agregan validaciones de seguridad para evitar que se ingresen datos erróneos, como impedir que un empleado registre jornadas irreales, como por ejemplo más de 12 horas en un solo día o valores negativos.
 
 ## Estado del Proyecto
 
