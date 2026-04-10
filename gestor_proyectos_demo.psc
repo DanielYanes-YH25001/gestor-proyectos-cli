@@ -47,7 +47,7 @@ Algoritmo GestorProyectos
 				
 				//Módulo 3 patantalla que muestra resumen de actividades
 				Escribir "                                                                       "
-				Escribir "====================== RESUMEN DE ACTIVIDAD ==========================="
+				Escribir "====================== RESUMEN DE ACTIVIDAD  ==========================="
 				Escribir "_______________________________________________________________________"
 				Escribir " Gestor de Proyecto: " nombreProyecto
 				Escribir "_______________________________________________________________________"
@@ -57,7 +57,7 @@ Algoritmo GestorProyectos
 				Escribir "_______________________________________________________________________"
 				Escribir " Horas Acumuladas     " totalHoras
 				Escribir "_______________________________________________________________________"
-				Escribir "====================== FIN DE RESUMEN ================================"
+				Escribir "====================== FIN DE RESUMEN  ================================"
 				Escribir "                                                                       "
 
             3:
