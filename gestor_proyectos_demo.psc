@@ -30,8 +30,8 @@ Algoritmo GestorProyectos
                 Escribir "Ingrese la cantidad de horas trabajadas hoy: "
                 Leer horasTrabajadas
                 
-                Si horasTrabajadas > 24 Entonces
-                    Escribir "ERROR: Jornada irreal. No puede registrar más de 24 horas en un día."
+                Si horasTrabajadas > 12 Entonces
+                    Escribir "ERROR: Jornada irreal. No puede registrar más de 12 horas en un día."
                 Sino
                     Si horasTrabajadas < 0 Entonces
                         Escribir "ERROR: Horas negativas. No puede registrar valores negativos."
