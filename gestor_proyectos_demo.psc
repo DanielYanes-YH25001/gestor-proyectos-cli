@@ -53,11 +53,10 @@ Algoritmo GestorProyectos
 				Escribir "_______________________________________________________________________"
 				Escribir " Empleado:            " nombreEmpleado
 				Escribir "_______________________________________________________________________"
-				Escribir " Horas acumuladas     " totalHoras
+				Escribir " Horas acumuladas:    " totalHoras
 				Escribir "_______________________________________________________________________"
 				Escribir "====================== FIN DE RESUMEN ================================"
 				Escribir "                                                                       "
-
             3:
                 Escribir "Saliendo del gestor de proyectos..."
 
