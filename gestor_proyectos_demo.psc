@@ -43,25 +43,20 @@ Algoritmo GestorProyectos
                 FinSi
                 Escribir "----------------------------------------"
             2:
-                // TODO: Wilbert - Módulo 3: Visualización de datos
-                // 1. Mostrar en pantalla un resumen claro usando la función Escribir.
-                // 2. Debes imprimir las variables: nombreProyecto, nombreTarea, nombreEmpleado y el totalHoras acumulado hasta el momento.
-				
-				//Módulo 3
+				//Módulo 3-Visualizacion de datos
 				Escribir "                                                                       "
 				Escribir "====================== RESUMEN DE ACTIVIDAD ==========================="
 				Escribir "_______________________________________________________________________"
-				Escribir " GESTOR DE PROYECTOS: " nombreProyecto
+				Escribir " Gestor de proyectos: " nombreProyecto
 				Escribir "_______________________________________________________________________"
-				Escribir " TAREA:               " nombreTarea
+				Escribir " Tarea:               " nombreTarea
 				Escribir "_______________________________________________________________________"
 				Escribir " Empleado:            " nombreEmpleado
 				Escribir "_______________________________________________________________________"
-				Escribir " Horas acumuladas     " totalHoras
+				Escribir " Horas acumuladas:    " totalHoras
 				Escribir "_______________________________________________________________________"
 				Escribir "====================== FIN DE RESUMEN ================================"
 				Escribir "                                                                       "
-
             3:
                 Escribir "Saliendo del gestor de proyectos..."
 
