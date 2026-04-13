@@ -43,7 +43,7 @@ Algoritmo GestorProyectos
                 FinSi
                 Escribir ""
             2:
-				// Módulo 3 - Visualizacion de datos
+				// Módulo 3 - Visualización de datos
 				Escribir "                                                                       "
 				Escribir "====================== RESUMEN DE ACTIVIDAD ==========================="
 				Escribir " Gestor de proyectos: " nombreProyecto
