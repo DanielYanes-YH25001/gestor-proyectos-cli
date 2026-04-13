@@ -12,9 +12,9 @@ Algoritmo GestorProyectos
     
     Repetir
         // Módulo 1 - Menú principal para la navegación
-        Escribir "========================================"
+        Escribir "====================================================="
         Escribir " GESTOR DE PROYECTOS: ", nombreProyecto
-        Escribir "========================================"
+        Escribir "====================================================="
         Escribir "1. Registrar horas trabajadas en la tarea"
         Escribir "2. Ver resumen y total de horas"
         Escribir "3. Salir"
@@ -41,20 +41,15 @@ Algoritmo GestorProyectos
                         Escribir "Total acumulado hasta ahora: ", totalHoras, " horas."
                     FinSi
                 FinSi
-                Escribir "----------------------------------------"
+                Escribir ""
             2:
 				// Módulo 3 - Visualizacion de datos
 				Escribir "                                                                       "
 				Escribir "====================== RESUMEN DE ACTIVIDAD ==========================="
-				Escribir "_______________________________________________________________________"
 				Escribir " Gestor de proyectos: " nombreProyecto
-				Escribir "_______________________________________________________________________"
 				Escribir " Tarea:               " nombreTarea
-				Escribir "_______________________________________________________________________"
 				Escribir " Empleado:            " nombreEmpleado
-				Escribir "_______________________________________________________________________"
 				Escribir " Horas acumuladas:    " totalHoras
-				Escribir "_______________________________________________________________________"
 				Escribir "====================== FIN DE RESUMEN ================================"
 				Escribir "                                                                       "
             3:
