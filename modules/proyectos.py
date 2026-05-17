@@ -1,5 +1,5 @@
-# modules/proyectos.py
 import datos
+
 def validar_entrada(mensaje):
   """
   Solicita un valor al usuario y valida que no esté vacío.
