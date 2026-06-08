@@ -1,5 +1,7 @@
-#clase para crear las tareas, con las validaciones
+
 class Tarea:
+  """Clase para modelar una tarea"""
+
   def __init__(self, id, id_proyecto, descripcion):
     if not isinstance(id, int) or id <= 0:
       raise ValueError("El ID de la tarea debe ser un entero positivo.")
@@ -11,21 +13,27 @@ class Tarea:
     self.id = id
     self.id_proyecto = id_proyecto
     self.descripcion = descripcion.strip()
-#metodo para guardar los datos en JSON
+
   def to_dict(self):
+    """metodo para guardar los datos en JSON"""
+
     return {
       "id": self.id,
       "id_proyecto": self.id_proyecto,
       "descripcion": self.descripcion,
     }
-#metodo de clase para traer una tarea
+  
   @classmethod
   def from_dict(cls, data):
+    """Método de clase para traer una tarea"""
+
     return cls(
       id=data["id"],
       id_proyecto=data["id_proyecto"],
       descripcion=data["descripcion"],
     )
-#metodo para imprimir los datos de una tarea 
+ 
   def __str__(self):
+    """metodo para imprimir los datos de una tarea"""
+    
     return f"Tarea(id={self.id}, id_proyecto={self.id_proyecto}, descripcion='{self.descripcion}')"
