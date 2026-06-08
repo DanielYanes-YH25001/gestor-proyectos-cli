@@ -16,7 +16,7 @@ class Proyecto:
     self.estado = estado
 
   def to_dict(self):
-    """metodo para guardar los datos en JSON"""
+    """metodo para guardar los datos en JSON"""  
 
     return {
       "id": self.id,
