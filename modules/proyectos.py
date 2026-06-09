@@ -1,57 +1,92 @@
-import datos
+from modules.ui import error, info, prompt_input, render_menu, render_table, success
+from utils import validar_entrada
 
-def validar_entrada(mensaje):
+
+def menu_proyectos(proyecto_service):
   """
-  Solicita un valor al usuario y valida que no esté vacío.
-  
+  Menú interactivo para gestionar proyectos
+
   Args:
-    mensaje (str): Mensaje a mostrar al usuario
-    
-  Returns:
-    str: Valor ingresado por el usuario (sin espacios en blanco al inicio/final)
+    proyecto_service (ProyectoService): Servicio de proyecto con operaciones CRUD
   """
-  while True:
-    valor = input(mensaje).strip()
-    if valor:
-      return valor
-    else:
-      print("Error: El campo no puede estar vacío. Intente de nuevo.")
 
-def menu_proyectos():
-  """
-  Muestra el menú de gestión de proyectos y maneja las opciones del usuario.
-  """
   while True:
-    print("\n--- SECCIÓN: GESTIÓN DE PROYECTOS ---")
-    print("1. Ver lista de proyectos")
-    print("2. Agregar nuevo proyecto")
-    print("3. Volver al menú principal")
-    
-    opcion = input("Seleccione una opción: ")
-    
+    render_menu(
+      "Gestión de Proyectos",
+      [
+        "Ver lista de proyectos",
+        "Agregar nuevo proyecto",
+        "Actualizar proyecto",
+        "Eliminar proyecto",
+        "Volver al menú principal"
+      ]
+    )
+
+    opcion = prompt_input("Seleccione una opción").strip()
+
     if opcion == "1":
-      print("\n--- LISTA DE PROYECTOS ---")
-      
-      if not datos.proyectos:
-        print("No hay proyectos registrados.")
+      proyectos = proyecto_service.obtener_todos()
+      if not proyectos:
+        info("No hay proyectos registrados.")
       else:
-        for p in datos.proyectos:
-          print(f"ID: {p['id']} | Nombre: {p['nombre']} | Estado: {p['estado']}")
-    
+        rows = [(p.id, p.nombre, p.estado) for p in proyectos]
+        render_table(["ID", "Nombre", "Estado"], rows, title = "Lista de Proyectos")
+
     elif opcion == "2":
-      nombre = validar_entrada("Ingrese el nombre del proyecto: ")
-      
-      nuevo_proyecto = {
-        "id": datos.id_proyecto_actual,
-        "nombre": nombre,
-        "estado": "Activo"
-      }
-      datos.proyectos.append(nuevo_proyecto)
-      print(f"Éxito: Proyecto '{nombre}' creado con ID {datos.id_proyecto_actual}.")
-      datos.id_proyecto_actual += 1
-    
+      try:
+        nombre = validar_entrada("Ingrese el nombre del proyecto")
+        proyecto = proyecto_service.crear(nombre)
+        success(f"Proyecto '{proyecto.nombre}' creado con ID {proyecto.id}.")
+      except ValueError as err:
+        error(f"Error: {err}")
+
     elif opcion == "3":
+      try:
+        id_proyecto = int(prompt_input("Ingrese el ID del proyecto a actualizar"))
+        proyecto = proyecto_service.obtener_por_id(id_proyecto)
+        if not proyecto:
+          error("Error: Proyecto no encontrado.")
+          continue
+
+        nombre = prompt_input(
+          f"Nuevo nombre (actual: {proyecto.nombre}) [Enter para conservar]",
+          default = ""
+        ).strip()
+        estado = prompt_input(
+          f"Nuevo estado (Activo/Finalizado/Pausado) (actual: {proyecto.estado}) [Enter para conservar]",
+          default = ""
+        ).strip()
+
+        if not nombre:
+          nombre = None
+        if not estado:
+          estado = None
+
+        proyecto_service.actualizar(id_proyecto, nombre = nombre, estado = estado)
+        success("Proyecto actualizado correctamente.")
+      except ValueError as err:
+        error(f"Error: {err}")
+
+    elif opcion == "4":
+      try:
+        id_proyecto = int(prompt_input("Ingrese el ID del proyecto a eliminar"))
+        confirmacion = prompt_input(
+          "ADVERTENCIA: Esto eliminará el proyecto, sus tareas y asignaciones asociadas. (si/no)",
+          default = "no"
+        ).strip().lower()
+
+        if confirmacion == "si":
+          if proyecto_service.eliminar(id_proyecto):
+            success("Proyecto eliminado correctamente.")
+          else:
+            error("Error: Proyecto no encontrado.")
+        else:
+          info("Operación cancelada.")
+      except ValueError:
+        error("Error: Ingrese un ID numérico válido.")
+
+    elif opcion == "5":
       break
-    
+
     else:
-      print("Opción inválida. Por favor, seleccione una de las tres opciones.")
+      error("Opción inválida. Por favor, seleccione una de las opciones.")
