@@ -8,6 +8,10 @@ from services.tarea_service import TareaService
 
 
 def main():
+  """
+  Función principal para la ejecución del gestor de proyectos
+  """
+
   # Instanciamos un manejador de persistencia y cargamos los datos
   manejador_persistencia = ManejadorPersistencia()
   manejador_persistencia.cargar_datos()
@@ -27,8 +31,8 @@ def main():
         "Gestionar Proyectos",
         "Gestionar Empleados",
         "Gestionar Tareas y Asignaciones",
-        "Salir del gestor",
-      ],
+        "Salir del gestor"
+      ]
     )
 
     # Solicitamos al usuario que seleccione una opción
@@ -48,7 +52,7 @@ def main():
         tarea_service,
         proyecto_service,
         empleado_service,
-        asignacion_service,
+        asignacion_service
       )
 
     elif opcion == "4":
