@@ -1,56 +1,93 @@
-import datos
+from modules.ui import error, info, prompt_input, render_menu, render_table, success
+from utils import validar_entrada
 
-def validar_entrada(mensaje):
-  """Solicita un valor al usuario y asegura que no esté vacío."""
-  while True:
-    valor = input(mensaje).strip()
-    if valor:
-      return valor
-    print("Error: El campo no puede estar vacío. Intente de nuevo.")
 
-def mostrar_empleados():
-  """Muestra la lista de empleados registrados."""
-  print("\n--- LISTA DE EMPLEADOS ---")
+def menu_empleados(empleado_service):
+  """
+  Menú interactivo para gestionar empleados
+
+  Args:
+    empleado_service (EmpleadoService): Servicio de empleado con operaciones CRUD
+  """
   
-  if not datos.empleados:
-    print("No hay empleados registrados.")
-    return
-
-  for e in datos.empleados:
-    print(f"ID: {e['id']} | Nombre: {e['nombre']} | Rol: {e['rol']}")
-
-def registrar_empleado():
-  """Gestiona el flujo para añadir un nuevo empleado."""
-  nombre = validar_entrada("Ingrese el nombre del empleado: ")
-  rol = validar_entrada("Ingrese el rol (Ej. Desarrollador): ")
-
-  nuevo_empleado = {
-    "id": datos.id_empleado_actual,
-    "nombre": nombre,
-    "rol": rol
-  }
-
-  datos.empleados.append(nuevo_empleado)
-  print(f"Éxito: Empleado '{nombre}' registrado con ID {datos.id_empleado_actual}.")
-  
-  # Incrementamos el contador global para el próximo registro
-  datos.id_empleado_actual += 1
-
-def menu_empleados():
-  """Muestra el menú de gestión de empleados y procesa las opciones."""
   while True:
-    print("\n--- SECCIÓN: GESTIÓN DE EMPLEADOS ---")
-    print("1. Ver lista de empleados")
-    print("2. Agregar nuevo empleado")
-    print("3. Volver al menú principal")
-    
-    opcion = input("Seleccione una opción: ").strip()
+    render_menu(
+      "Gestión de Empleados",
+      [
+        "Ver lista de empleados",
+        "Agregar nuevo empleado",
+        "Actualizar empleado",
+        "Eliminar empleado",
+        "Volver al menú principal"
+      ]
+    )
+
+    opcion = prompt_input("Seleccione una opción").strip()
 
     if opcion == "1":
-      mostrar_empleados()
+      empleados = empleado_service.obtener_todos()
+      if not empleados:
+        info("No hay empleados registrados.")
+      else:
+        rows = [(e.id, e.nombre, e.rol) for e in empleados]
+        render_table(["ID", "Nombre", "Rol"], rows, title = "Lista de Empleados")
+
     elif opcion == "2":
-      registrar_empleado()
+      try:
+        nombre = validar_entrada("Ingrese el nombre del empleado")
+        rol = validar_entrada("Ingrese el rol (Ej. Desarrollador)")
+        empleado = empleado_service.crear(nombre, rol)
+        success(f"Empleado '{empleado.nombre}' registrado con ID {empleado.id}.")
+      except ValueError as err:
+        error(f"Error: {err}")
+
     elif opcion == "3":
+      try:
+        id_empleado = int(prompt_input("Ingrese el ID del empleado a actualizar"))
+        empleado = empleado_service.obtener_por_id(id_empleado)
+        if not empleado:
+          error("Error: Empleado no encontrado.")
+          continue
+
+        nombre = prompt_input(
+          f"Nuevo nombre (actual: {empleado.nombre}) [Enter para conservar]",
+          default = ""
+        ).strip()
+        rol = prompt_input(
+          f"Nuevo rol (actual: {empleado.rol}) [Enter para conservar]",
+          default = ""
+        ).strip()
+
+        if not nombre:
+          nombre = None
+        if not rol:
+          rol = None
+
+        empleado_service.actualizar(id_empleado, nombre = nombre, rol = rol)
+        success("Empleado actualizado correctamente.")
+      except ValueError as err:
+        error(f"Error: {err}")
+
+    elif opcion == "4":
+      try:
+        id_empleado = int(prompt_input("Ingrese el ID del empleado a eliminar"))
+        confirmacion = prompt_input(
+          "ADVERTENCIA: Esto eliminará el empleado y sus asignaciones. (si/no)",
+          default = "no"
+        ).strip().lower()
+
+        if confirmacion == "si":
+          if empleado_service.eliminar(id_empleado):
+            success("Empleado eliminado correctamente.")
+          else:
+            error("Error: Empleado no encontrado.")
+        else:
+          info("Operación cancelada.")
+      except ValueError:
+        error("Error: Ingrese un ID numérico válido.")
+
+    elif opcion == "5":
       break
+
     else:
-      print("Opción inválida. Por favor, seleccione una de las tres opciones.")
+      error("Opción inválida. Por favor, seleccione una de las opciones.")
