@@ -1,5 +1,5 @@
 class Asignacion:
-  """clase para crear la asignacion de proyecto, con las validaciones"""
+  """Clase para crear la asignacion de proyecto, con las validaciones"""
 
   def __init__(self, id, id_tarea, id_empleado, horas=0.0):
     if not isinstance(id, int) or id <= 0:
@@ -17,7 +17,7 @@ class Asignacion:
     self.horas = float(horas)
 
   def to_dict(self):
-    """metodo para guardar los datos en JSON"""
+    """Método para guardar los datos en JSON"""
 
     return {
       "id": self.id,
@@ -28,7 +28,7 @@ class Asignacion:
 
   @classmethod
   def from_dict(cls, data):
-    """metodo de clase para traer una asigancion"""
+    """Método de clase para traer una asigancion"""
 
     return cls(
       id=data["id"],
@@ -38,7 +38,7 @@ class Asignacion:
     )
 
   def __str__(self):
-    """metodo para imprimir los atributos de la asignacion"""
+    """Método para imprimir los atributos de la asignacion"""
 
     return (
       f"Asignacion(id={self.id}, id_tarea={self.id_tarea}, "

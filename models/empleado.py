@@ -1,5 +1,5 @@
 class Empleado:
-  """clase para crear el empleado, con las validaciones"""
+  """Clase para crear el empleado, con las validaciones"""
 
   def __init__(self, id, nombre, rol):
     if not isinstance(id, int) or id <= 0:
@@ -14,7 +14,7 @@ class Empleado:
     self.rol = rol.strip()
 
   def to_dict(self):
-    """metodo para guardar los datos en JSON"""
+    """Método para guardar los datos en JSON"""
 
     return {
       "id": self.id,
@@ -24,7 +24,7 @@ class Empleado:
 
   @classmethod
   def from_dict(cls, data):
-    """metodo de clase para traer un empleado"""
+    """Método de clase para traer un empleado"""
 
     return cls(
       id=data["id"],
@@ -33,6 +33,6 @@ class Empleado:
     )
 
   def __str__(self):
-    """metodo para imprimir los datos de un empleado"""
+    """Método para imprimir los datos de un empleado"""
     
     return f"Empleado(id={self.id}, nombre='{self.nombre}', rol='{self.rol}')"
