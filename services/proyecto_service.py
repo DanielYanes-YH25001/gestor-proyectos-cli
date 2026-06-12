@@ -67,13 +67,13 @@ class ProyectoService:
     if not proyecto:
       return False
 
+    tareas_eliminar = [t for t in datos["tareas"] if t["id_proyecto"] == id_proyecto]
+    ids_tareas_eliminar = {t["id"] for t in tareas_eliminar}
+
+    # Elimina las asignaciones de las tareas relacionadas al proyecto
+    datos["asignaciones"] = [a for a in datos["asignaciones"] if a["id_tarea"] not in ids_tareas_eliminar]
     # Elimina todas las tareas del proyecto
     datos["tareas"] = [t for t in datos["tareas"] if t["id_proyecto"] != id_proyecto]
-    # Elimina las asignaciones de las tareas eliminadas
-    datos["asignaciones"] = [
-      a for a in datos["asignaciones"]
-      if a["id_tarea"] not in [t["id"] for t in datos["tareas"]]
-    ]
     # Elimina el proyecto
     datos["proyectos"] = [p for p in datos["proyectos"] if p["id"] != id_proyecto]
 
