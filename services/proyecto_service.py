@@ -2,22 +2,22 @@ from models.proyecto import Proyecto
 
 
 class ProyectoService:
-  # Servicio para gestionar proyectos
-  
+  """Servicio para gestionar proyectos"""
+
   def __init__(self, manejador_persistencia):
-    # Constructor: recibe el manejador de persistencia
     self.manejador_persistencia = manejador_persistencia
 
   def _cargar(self):
-    # Carga los datos desde el manejador de persistencia
+    """Carga los datos desde el manejador de persistencia"""
     return self.manejador_persistencia.cargar_datos()
 
   def _guardar(self, datos):
-    # Guarda los datos en el manejador de persistencia
+    """Guarda los datos en el manejador de persistencia"""
     self.manejador_persistencia.guardar_datos(datos)
 
-  def crear(self, nombre, estado="Activo"):
-    # Crea un nuevo proyecto con estado inicial (por defecto "Activo")
+  def crear(self, nombre, estado = "Activo"):
+    """Crea un nuevo proyecto con un estado inicial (por defecto "Activo")"""
+
     datos = self._cargar()
     nuevo_id = self.manejador_persistencia.obtener_proximo_id(datos["proyectos"])
     proyecto = Proyecto(nuevo_id, nombre, estado)
@@ -26,18 +26,21 @@ class ProyectoService:
     return proyecto
 
   def obtener_todos(self):
-    # Retorna todos los proyectos
+    """Retorna todos los proyectos"""
+
     datos = self._cargar()
     return [Proyecto.from_dict(p) for p in datos["proyectos"]]
 
   def obtener_por_id(self, id_proyecto):
-    # Obtiene un proyecto por su ID
+    """Obtiene un proyecto por su ID"""
+
     datos = self._cargar()
     proyecto = next((p for p in datos["proyectos"] if p["id"] == id_proyecto), None)
     return Proyecto.from_dict(proyecto) if proyecto else None
 
-  def actualizar(self, id_proyecto, nombre=None, estado=None):
-    # Actualiza los datos de un proyecto (nombre y/o estado)
+  def actualizar(self, id_proyecto, nombre = None, estado = None):
+    """Actualiza los datos de un proyecto (nombre y/o estado)"""
+
     datos = self._cargar()
     proyecto = next((p for p in datos["proyectos"] if p["id"] == id_proyecto), None)
     if not proyecto:
@@ -57,7 +60,8 @@ class ProyectoService:
     return True
 
   def eliminar(self, id_proyecto):
-    # Elimina un proyecto y sus tareas y asignaciones relacionadas
+    """Elimina un proyecto y sus tareas y asignaciones relacionadas"""
+
     datos = self._cargar()
     proyecto = next((p for p in datos["proyectos"] if p["id"] == id_proyecto), None)
     if not proyecto:

@@ -22,7 +22,7 @@ class ManejadorPersistencia:
 
   def cargar_datos(self):
     """Carga el archivo JSON, creando un archivo vacío si no existe"""
-    
+
     if not self.filepath.exists():
       self._crear_archivo_vacio()
 

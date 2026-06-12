@@ -15,24 +15,21 @@ class Tarea:
 
   def to_dict(self):
     """Método para guardar los datos en JSON"""
-
     return {
       "id": self.id,
       "id_proyecto": self.id_proyecto,
-      "descripcion": self.descripcion,
+      "descripcion": self.descripcion
     }
-  
+
   @classmethod
   def from_dict(cls, data):
     """Método de clase para traer una tarea"""
-
     return cls(
-      id=data["id"],
-      id_proyecto=data["id_proyecto"],
-      descripcion=data["descripcion"],
+      id = data["id"],
+      id_proyecto = data["id_proyecto"],
+      descripcion = data["descripcion"]
     )
- 
+
   def __str__(self):
     """Método para imprimir los datos de una tarea"""
-    
     return f"Tarea(id={self.id}, id_proyecto={self.id_proyecto}, descripcion='{self.descripcion}')"
