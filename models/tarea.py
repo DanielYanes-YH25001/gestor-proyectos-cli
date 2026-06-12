@@ -1,4 +1,3 @@
-
 class Tarea:
   """Clase para modelar una tarea"""
 
@@ -15,7 +14,7 @@ class Tarea:
     self.descripcion = descripcion.strip()
 
   def to_dict(self):
-    """metodo para guardar los datos en JSON"""
+    """Método para guardar los datos en JSON"""
 
     return {
       "id": self.id,
@@ -34,6 +33,6 @@ class Tarea:
     )
  
   def __str__(self):
-    """metodo para imprimir los datos de una tarea"""
+    """Método para imprimir los datos de una tarea"""
     
     return f"Tarea(id={self.id}, id_proyecto={self.id_proyecto}, descripcion='{self.descripcion}')"

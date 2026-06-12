@@ -16,7 +16,7 @@ class Proyecto:
     self.estado = estado
 
   def to_dict(self):
-    """metodo para guardar los datos en JSON"""  
+    """Método para guardar los datos en JSON"""  
 
     return {
       "id": self.id,
@@ -26,7 +26,7 @@ class Proyecto:
 
   @classmethod
   def from_dict(cls, data):
-    """metodo de clase para traer un proyecto"""
+    """Método de clase para traer un proyecto"""
 
     return cls(
       id=data["id"],
@@ -35,6 +35,6 @@ class Proyecto:
     )
  
   def __str__(self):
-    """metodo para imprimir los atributos de un proyecto"""
+    """Método para imprimir los atributos de un proyecto"""
     
     return f"Proyecto(id={self.id}, nombre='{self.nombre}', estado='{self.estado}')"
