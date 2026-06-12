@@ -8,8 +8,7 @@ from models.proyecto import Proyecto
 
 class ProyectosTests(unittest.TestCase):
   def setUp(self):
-    """Configura el entorno inicial simulando la persistencia de datos"""
-
+    
     self.mock_persistencia = Mock(spec=ManejadorPersistencia)
     self.proyecto_service = ProyectoService(self.mock_persistencia)
 
@@ -21,8 +20,7 @@ class ProyectosTests(unittest.TestCase):
     ]
 
   def test_excepciones_creacion_modelo_proyecto(self):
-    """Valida que el modelo lance errores ante datos inválidos"""
-
+    
     with self.assertRaises(ValueError):
       Proyecto("1", "Sistema de asistencia por reconocimiento facial", "Activo")
 
@@ -36,8 +34,7 @@ class ProyectosTests(unittest.TestCase):
       Proyecto(1, "Sistema de asistencia por reconocimiento facial", "Otro Estado")
   
   def test_str_representacion_modelo_proyecto(self):
-    """Verifica que el texto representativo del proyecto sea correcto"""
-
+    
     proyecto_creado = Proyecto(1, "Sistema de asistencia por reconocimiento facial", "Activo")
     
     self.assertEqual(
@@ -46,8 +43,7 @@ class ProyectosTests(unittest.TestCase):
     )
 
   def test_obtener_lista_proyectos(self):
-    """Comprueba que el servicio liste todos los proyectos guardados"""
-
+   
     self.mock_persistencia.cargar_datos.return_value = {
       "proyectos": self.lista_proyectos_iniciales,
       "empleados": [],
@@ -65,7 +61,7 @@ class ProyectosTests(unittest.TestCase):
     self.mock_persistencia.guardar_datos.assert_not_called()
 
   def test_agregar_nuevo_proyecto(self):
-    """Verifica la inserción exitosa de un proyecto en persistencia"""
+   
 
     datos = {
       "proyectos": list(self.lista_proyectos_iniciales),
@@ -94,8 +90,7 @@ class ProyectosTests(unittest.TestCase):
     )
 
   def test_actualizar_proyecto(self):
-    """Confirma la modificación correcta de un proyecto por ID"""
-
+   
     datos = {
       "proyectos": list(self.lista_proyectos_iniciales),
       "empleados": [],
@@ -119,8 +114,7 @@ class ProyectosTests(unittest.TestCase):
     )
 
   def test_eliminar_proyecto(self):
-    """Comprueba el borrado exitoso de un proyecto existente"""
-
+    
     datos = {
       "proyectos": list(self.lista_proyectos_iniciales),
       "empleados": [],
@@ -138,7 +132,7 @@ class ProyectosTests(unittest.TestCase):
     self.assertFalse(any(p["id"] == 4 for p in datos["proyectos"]))
 
   def test_obtener_por_id_proyecto(self):
-    """Valida la búsqueda correcta de proyecto usando su ID"""
+   
     
     self.mock_persistencia.cargar_datos.return_value = {
       "proyectos": self.lista_proyectos_iniciales,
@@ -154,8 +148,7 @@ class ProyectosTests(unittest.TestCase):
     self.assertEqual(resultado.nombre, "App de Turismo de El Salvador")
 
   def test_obtener_por_id_proyecto_no_existe(self):
-    """Asegura que devuelva None buscando un ID no registrado"""
-
+   
     self.mock_persistencia.cargar_datos.return_value = {
       "proyectos": self.lista_proyectos_iniciales,
       "empleados": [],
@@ -168,8 +161,7 @@ class ProyectosTests(unittest.TestCase):
     self.assertIsNone(resultado)
 
   def test_actualizar_proyecto_solo_nombre(self):
-    """Modifica parcialmente el proyecto cambiando solamente su nombre actual"""
-
+   
     datos = {
       "proyectos": list(self.lista_proyectos_iniciales),
       "empleados": [],
@@ -185,8 +177,7 @@ class ProyectosTests(unittest.TestCase):
     self.assertEqual(datos["proyectos"][0]["estado"], "Activo")
 
   def test_actualizar_proyecto_solo_estado(self):
-    """Modifica parcialmente el proyecto cambiando solamente su estado actual"""
-
+   
     datos = {
       "proyectos": list(self.lista_proyectos_iniciales),
       "empleados": [],
@@ -202,8 +193,7 @@ class ProyectosTests(unittest.TestCase):
     self.assertEqual(datos["proyectos"][0]["estado"], "Pausado")
 
   def test_actualizar_proyecto_nombre_vacio(self):
-    """Rechaza la actualización si asignas un nombre vacío"""
-
+    
     datos = {
       "proyectos": list(self.lista_proyectos_iniciales),
       "empleados": [],
@@ -216,8 +206,7 @@ class ProyectosTests(unittest.TestCase):
       self.proyecto_service.actualizar(1, "")
 
   def test_actualizar_proyecto_nombre_no_string(self):
-    """Evita actualizar nombres usando tipos de datos inválidos"""
-
+   
     datos = {
       "proyectos": list(self.lista_proyectos_iniciales),
       "empleados": [],
@@ -230,8 +219,7 @@ class ProyectosTests(unittest.TestCase):
       self.proyecto_service.actualizar(1, 123)
 
   def test_actualizar_proyecto_estado_invalido(self):
-    """Deniega actualizaciones si usas estados no permitidos textualmente"""
-
+    
     datos = {
       "proyectos": list(self.lista_proyectos_iniciales),
       "empleados": [],
@@ -244,8 +232,7 @@ class ProyectosTests(unittest.TestCase):
       self.proyecto_service.actualizar(1, estado="Invalido")
 
   def test_actualizar_proyecto_no_existe(self):
-    """Retorna False intentando actualizar un ID no existente"""
-
+   
     datos = {
       "proyectos": list(self.lista_proyectos_iniciales),
       "empleados": [],
@@ -259,7 +246,7 @@ class ProyectosTests(unittest.TestCase):
     self.assertFalse(resultado)
 
   def test_eliminar_proyecto_no_existe(self):
-    """Retorna False intentando eliminar un ID no existente"""
+    
     datos = {
       "proyectos": list(self.lista_proyectos_iniciales),
       "empleados": [],
@@ -273,7 +260,6 @@ class ProyectosTests(unittest.TestCase):
     self.assertFalse(resultado)
 
   def test_eliminar_proyecto_con_tareas_y_asignaciones(self):
-    """Garantiza el borrado en cascada de dependencias vinculadas"""
 
     datos = {
       "proyectos": list(self.lista_proyectos_iniciales),
