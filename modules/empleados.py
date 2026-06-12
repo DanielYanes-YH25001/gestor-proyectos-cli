@@ -9,7 +9,7 @@ def menu_empleados(empleado_service):
   Args:
     empleado_service (EmpleadoService): Servicio de empleado con operaciones CRUD
   """
-  
+
   while True:
     render_menu(
       "Gestión de Empleados",

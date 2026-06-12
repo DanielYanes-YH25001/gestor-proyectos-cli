@@ -15,7 +15,7 @@ class AsignacionesTests(unittest.TestCase):
       {"id": 1, "id_tarea": 1, "id_empleado": 1, "horas": 4.0},
       {"id": 2, "id_tarea": 2, "id_empleado": 2, "horas": 3.5}
     ]
-  
+
   def test_excepciones_creacion_modelo_asignacion(self):
     with self.assertRaises(ValueError):
       Asignacion("1", 1, 1, 5)
@@ -40,7 +40,7 @@ class AsignacionesTests(unittest.TestCase):
 
   def test_str_representacion_modelo_asignacion(self):
     asignacion_creada = Asignacion(1, 1, 1, 5)
-    
+
     self.assertEqual(
       asignacion_creada.__str__(),
       "Asignacion(id=1, id_tarea=1, id_empleado=1, horas=5.0)"

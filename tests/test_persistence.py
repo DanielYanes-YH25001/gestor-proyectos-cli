@@ -21,7 +21,7 @@ class PersistenceTests(unittest.TestCase):
       "tareas": [{"id": 1, "id_proyecto": 1, "descripcion": "Tarea 1"}],
       "asignaciones": [{"id": 1, "id_tarea": 1, "id_empleado": 1, "horas": 5.0}]
     }
-    
+
     with open(self.temp_path, "w", encoding = "utf-8") as f:
       json.dump(datos_iniciales, f)
 
@@ -112,14 +112,14 @@ class PersistenceTests(unittest.TestCase):
     datos_incompletos = {
       "proyectos": [{"id": 1, "nombre": "Proyecto 1", "estado": "Activo"}]
     }
-    
+
     with open(self.temp_path, "w", encoding = "utf-8") as f:
       json.dump(datos_incompletos, f)
 
     manejador = ManejadorPersistencia(self.temp_path)
     datos = manejador.cargar_datos()
 
-    self.assertEqual(len(datos["proyectos"]), 1) 
+    self.assertEqual(len(datos["proyectos"]), 1)
     self.assertEqual(datos["empleados"], [])
     self.assertEqual(datos["tareas"], [])
     self.assertEqual(datos["asignaciones"], [])
