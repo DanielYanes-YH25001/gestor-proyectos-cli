@@ -2,22 +2,22 @@ from models.empleado import Empleado
 
 
 class EmpleadoService:
-  # Servicio para gestionar empleados
-  
+  """Servicio para gestionar empleados"""
+
   def __init__(self, manejador_persistencia):
-    # Constructor: recibe el manejador de persistencia
     self.manejador_persistencia = manejador_persistencia
 
   def _cargar(self):
-    # Carga los datos desde el manejador de persistencia
+    """Carga los datos desde el manejador de persistencia"""
     return self.manejador_persistencia.cargar_datos()
 
   def _guardar(self, datos):
-    # Guarda los datos en el manejador de persistencia
+    """Guarda los datos en el manejador de persistencia"""
     self.manejador_persistencia.guardar_datos(datos)
 
   def crear(self, nombre, rol):
-    # Crea un nuevo empleado
+    """Crea un nuevo empleado"""
+
     datos = self._cargar()
     nuevo_id = self.manejador_persistencia.obtener_proximo_id(datos["empleados"])
     empleado = Empleado(nuevo_id, nombre, rol)
@@ -26,18 +26,21 @@ class EmpleadoService:
     return empleado
 
   def obtener_todos(self):
-    # Retorna todos los empleados
+    """Retorna todos los empleados"""
+
     datos = self._cargar()
     return [Empleado.from_dict(e) for e in datos["empleados"]]
 
   def obtener_por_id(self, id_empleado):
-    # Obtiene un empleado por su ID
+    """Obtiene un empleado por su ID"""
+
     datos = self._cargar()
     empleado = next((e for e in datos["empleados"] if e["id"] == id_empleado), None)
     return Empleado.from_dict(empleado) if empleado else None
 
   def actualizar(self, id_empleado, nombre=None, rol=None):
-    # Actualiza los datos de un empleado (nombre y/o rol)
+    """Actualiza los datos de un empleado (nombre y/o rol)"""
+
     datos = self._cargar()
     empleado = next((e for e in datos["empleados"] if e["id"] == id_empleado), None)
     if not empleado:
@@ -57,7 +60,8 @@ class EmpleadoService:
     return True
 
   def eliminar(self, id_empleado):
-    # Elimina un empleado y sus asignaciones relacionadas
+    """Elimina un empleado y sus asignaciones relacionadas"""
+
     datos = self._cargar()
     empleado = next((e for e in datos["empleados"] if e["id"] == id_empleado), None)
     if not empleado:
