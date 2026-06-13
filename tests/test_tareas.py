@@ -23,7 +23,7 @@ class TareasTests(unittest.TestCase):
 
     with self.assertRaises(ValueError):
       Tarea(-999, 1, "Elaborar estructura de carpetas y archivos")
-    
+
     with self.assertRaises(ValueError):
       Tarea(1, "1", "Elaborar estructura de carpetas y archivos")
 
@@ -35,10 +35,10 @@ class TareasTests(unittest.TestCase):
 
     with self.assertRaises(ValueError):
       Tarea(1, 1, 999)
-  
+
   def test_str_representacion_modelo_tarea(self):
     tarea_creada = Tarea(1, 1, "Elaborar estructura de carpetas y archivos")
-    
+
     self.assertEqual(
       tarea_creada.__str__(),
       "Tarea(id=1, id_proyecto=1, descripcion='Elaborar estructura de carpetas y archivos')"

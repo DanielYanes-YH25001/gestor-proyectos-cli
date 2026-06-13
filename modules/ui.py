@@ -31,7 +31,7 @@ def render_menu(title, options):
 
   Args:
     title (str): Título del menú
-    options (list[str]): Lista de opciones a mostrar 
+    options (list[str]): Lista de opciones a mostrar
   """
 
   table = Table(show_header = False, box = box.SIMPLE, pad_edge = False)
