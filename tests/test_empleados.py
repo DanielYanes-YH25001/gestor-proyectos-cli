@@ -17,11 +17,9 @@ class EmpleadosTests(unittest.TestCase):
     Configuración inicial que se ejecuta antes de cada prueba.
     Crea un mock de ManejadorPersistencia y una instancia del servicio.
     """
-    # Crear mock con la misma interfaz que ManejadorPersistencia
     self.mock_persistencia = Mock(spec = ManejadorPersistencia)
     self.service = EmpleadoService(self.mock_persistencia)
 
-    # Datos de ejemplo para las pruebas
     self.lista_empleados_iniciales = [
       {"id": 1, "nombre": "Ana Pérez", "rol": "Desarrollador"},
       {"id": 2, "nombre": "Luis Gómez", "rol": "Analista"}
@@ -33,16 +31,16 @@ class EmpleadosTests(unittest.TestCase):
     Debe lanzar ValueError cuando se proporcionan datos inválidos.
     """
     with self.assertRaises(ValueError):
-      Empleado("1", "Daniel Yanes", "Cybersecurity Analyst")  # ID debe ser entero
+      Empleado("1", "Daniel Yanes", "Cybersecurity Analyst")
 
     with self.assertRaises(ValueError):
-      Empleado(-999, "Daniel Yanes", "Cybersecurity Analyst")  # ID negativo
+      Empleado(-999, "Daniel Yanes", "Cybersecurity Analyst")
 
     with self.assertRaises(ValueError):
-      Empleado(1, 999, "Cybersecurity Analyst")  # Nombre debe ser string
+      Empleado(1, 999, "Cybersecurity Analyst")
 
     with self.assertRaises(ValueError):
-      Empleado(1, "Daniel Yanes", 999)  # Rol debe ser string
+      Empleado(1, "Daniel Yanes", 999)
 
   def test_str_representacion_modelo_empleado(self):
     """
@@ -60,7 +58,6 @@ class EmpleadosTests(unittest.TestCase):
     Prueba la obtención de todos los empleados.
     Verifica que se carguen los datos correctamente y se retorne la lista completa.
     """
-    # Configurar datos simulados
     datos = {
       "proyectos": [],
       "empleados": self.lista_empleados_iniciales,
@@ -69,10 +66,8 @@ class EmpleadosTests(unittest.TestCase):
     }
     self.mock_persistencia.cargar_datos.return_value = datos
 
-    # Ejecutar método a probar
     resultado = self.service.obtener_todos()
 
-    # Verificar resultados
     self.assertEqual(
       [{"id": e.id, "nombre": e.nombre, "rol": e.rol} for e in resultado],
       self.lista_empleados_iniciales
@@ -85,7 +80,6 @@ class EmpleadosTests(unittest.TestCase):
     Prueba la creación de un nuevo empleado.
     Verifica que se genere un ID correcto y se guarde en la persistencia.
     """
-    # Configurar datos simulados
     datos = {
       "proyectos": [],
       "empleados": list(self.lista_empleados_iniciales),
@@ -95,10 +89,8 @@ class EmpleadosTests(unittest.TestCase):
     self.mock_persistencia.cargar_datos.return_value = datos
     self.mock_persistencia.obtener_proximo_id.return_value = 3
 
-    # Ejecutar creación
     empleado = self.service.crear("María López", "QA")
 
-    # Verificar resultado
     self.assertEqual(empleado.id, 3)
     self.assertEqual(empleado.nombre, "María López")
     self.assertEqual(empleado.rol, "QA")
@@ -115,7 +107,6 @@ class EmpleadosTests(unittest.TestCase):
     Prueba la actualización completa de un empleado existente.
     Verifica que se actualicen tanto nombre como rol correctamente.
     """
-    # Configurar datos simulados
     datos = {
       "proyectos": [],
       "empleados": list(self.lista_empleados_iniciales),
@@ -124,10 +115,8 @@ class EmpleadosTests(unittest.TestCase):
     }
     self.mock_persistencia.cargar_datos.return_value = datos
 
-    # Ejecutar actualización
     actualizado = self.service.actualizar(2, "Luis G.", "Líder")
 
-    # Verificar resultado
     self.assertTrue(actualizado)
     self.mock_persistencia.cargar_datos.assert_called_once()
     self.mock_persistencia.guardar_datos.assert_called_once()
@@ -138,9 +127,7 @@ class EmpleadosTests(unittest.TestCase):
     """
     Prueba la eliminación de un empleado.
     Verifica que se elimine el empleado y todas sus asignaciones asociadas.
-    Este es un punto crítico para mantener la integridad referencial.
     """
-    # Configurar datos simulados con asignaciones
     datos = {
       "proyectos": [],
       "empleados": list(self.lista_empleados_iniciales),
@@ -152,10 +139,8 @@ class EmpleadosTests(unittest.TestCase):
     }
     self.mock_persistencia.cargar_datos.return_value = datos
 
-    # Ejecutar eliminación
     eliminado = self.service.eliminar(2)
 
-    # Verificar resultado: empleado eliminado y asignaciones limpiadas
     self.assertTrue(eliminado)
     self.mock_persistencia.cargar_datos.assert_called_once()
     self.mock_persistencia.guardar_datos.assert_called_once()
