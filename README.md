@@ -96,7 +96,7 @@ cd gestor-proyectos-cli
   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
   ```
 
-  Esto le indicará a PowerShell que permita la ejecución de scripts para el usuario actual del sistema. Presiona `S` + `Enter` para confirmar, y vuelve a intentar activar el entorno virtual.
+  Esto le indicará a PowerShell que permita la ejecución de scripts para el usuario actual del sistema. Presiona <kbd>S</kbd> + <kbd>Enter</kbd> para confirmar, y vuelve a intentar activar el entorno virtual.
 
 - En Windows (CMD):
 
